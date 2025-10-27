@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年11月教会予定表</title>
+
+<style>
+    body {
+        font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #000;
+        line-height: 1.7;
+    }
+
+    .print-container {
+        width: 297mm; /* A4横向き幅 */
+        min-height: 210mm; /* A4横向き高さ */
+        overflow: visible;
+        box-sizing: border-box;
+        padding: 4mm 10mm 6mm 10mm;
+    }
+
+    /* タイトル部分を表の上に配置 */
+    .calendar-header {
+        text-align: center;
+        margin-bottom: 6mm;
+    }
+
+    .calendar-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0;
+        color: #000;
+        letter-spacing: 0.5px;
+    }
+
+    .calendar-subtitle {
+        color: #333;
+        font-size: 12px;
+        margin: 4px 0 0;
+        font-weight: 500;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        border: 2px solid #000;
+    }
+
+    th {
+        background-color: #333;
+        color: white;
+        border: 1px solid #000;
+        padding: 6px 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    th.th-sunday {
+        background-color: #666;
+    }
+
+    th.th-saturday {
+        background-color: #666;
+    }
+
+    td {
+        border: 1px solid #000;
+        padding: 4px 6px;
+        height: auto;
+        min-height: 32mm;
+        vertical-align: top;
+    }
+
+    .date {
+        font-weight: 700;
+        margin-bottom: 3px;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+    .date-circle {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        border-radius: 50%;
+        border: 1px solid #666;
+        background-color: white;
+    }
+
+    .sunday {
+        background-color: #f5f5f5;
+    }
+
+    .sunday .date {
+        color: #000;
+        font-weight: 700;
+    }
+
+    .saturday .date {
+        color: #000;
+        font-weight: 600;
+    }
+
+    .sunday .date-circle {
+        background-color: #333;
+        color: white;
+        border: 1px solid #000;
+    }
+
+    .saturday .date-circle {
+        background-color: #888;
+        color: white;
+        border: 1px solid #000;
+    }
+
+    .event {
+        font-size: 11px;
+        margin-bottom: 1px;
+        line-height: 1.4;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-weight: 700;
+    }
+
+    .event-name {
+        flex-grow: 1;
+    }
+
+    .time {
+        color: #000;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+        margin-left: 4px;
+        background-color: #f0f0f0;
+        padding: 1px 3px;
+        border-radius: 2px;
+    }
+
+    .birthday {
+        color: #000;
+        font-weight: 500;
+    }
+
+    .holiday {
+        color: #000;
+        font-weight: 700;
+        border: 1px solid #000;
+        padding: 1px 3px;
+        background-color: #e8e8e8;
+        border-radius: 2px;
+    }
+
+    .holiday-cell {
+        background-color: #f0f0f0;
+    }
+
+    .other-month {
+        background-color: #f8f8f8;
+        color: #666;
+    }
+
+    .other-month .date {
+        color: #666;
+        font-weight: 400;
+    }
+
+    .other-month .event {
+        color: #999;
+        font-weight: 400;
+    }
+
+    /* 委員会・会議系 */
+    .committee-event {
+        font-weight: 700;
+        color: #000;
+        border-left: 3px solid #000;
+        padding-left: 3px;
+    }
+
+    /* キャンプ・特別行事 */
+    .camp-event {
+        font-weight: 700;
+        color: #000;
+        border: 1px dotted #333;
+        padding: 1px 3px;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    /* 礼拝関連 */
+    .worship {
+        font-weight: 700;
+        color: #000;
+    }
+
+    /* 祈祷会 */
+    .prayer {
+        color: #000;
+        font-weight: 700;
+    }
+
+    /* 聖書勉強 */
+    .study {
+        color: #000;
+        font-weight: 700;
+    }
+
+    /* セルグループ */
+    .cell-group {
+        color: #000;
+        font-weight: 700;
+    }
+
+    /* 訪問・出張 */
+    .visit-event {
+        font-weight: 700;
+        color: #000;
+        background-color: #f0f0f0;
+        border: 1px solid #999;
+        padding: 1px 3px;
+        border-radius: 2px;
+    }
+</style>
+
+</head>
+<body>
+    <div class="print-container">
+        <div class="calendar-header">
+            <h1 class="calendar-title">2025年11月あきる台バイブルチャーチ予定表</h1>
+            <p class="calendar-subtitle">作成日: 2025年10月27日</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="th-sunday">日</th>
+                    <th>月</th>
+                    <th>火</th>
+                    <th>水</th>
+                    <th>木</th>
+                    <th>金</th>
+                    <th class="th-saturday">土</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 前月 + 第1週 -->
+                <tr>
+                    <td class="other-month sunday">
+                        <div class="date"><span class="date-circle">26</span></div>
+                        <div class="event committee-event">
+                            <span class="event-name">中会会議</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">礼拝</span>
+                        </div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">27</span></div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">28</span></div>
+                        <div class="event committee-event">
+                            <span class="event-name">GCCスタッフ会議</span>
+                        </div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">29</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">タビタ</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event prayer">
+                            <span class="event-name">祈祷会</span>
+                            <span class="time">19:30</span>
+                        </div>
+                        <div class="event birthday">
+                            <span class="event-name">Happy Birthday!</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">板垣涼子さん</span>
+                        </div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">30</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ヨベル</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS7</span>
+                            <span class="time">12:00</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS3</span>
+                            <span class="time">14:30</span>
+                        </div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">31</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ナルド</span>
+                            <span class="time">13:30</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ろばの子</span>
+                            <span class="time">14:15</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS5</span>
+                            <span class="time">20:00</span>
+                        </div>
+                    </td>
+                    <td class="saturday">
+                        <div class="date"><span class="date-circle">1</span></div>
+                    </td>
+                </tr>
+                <!-- 第2週 -->
+                <tr>
+                    <td class="sunday">
+                        <div class="date"><span class="date-circle">2</span></div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">礼拝</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">聖餐式</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">教師会</span>
+                        </div>
+                    </td>
+                    <td class="holiday-cell">
+                        <div class="date"><span class="date-circle">3</span></div>
+                        <div class="event holiday">
+                            <span class="event-name">文化の日（祝日）</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">4</span></div>
+                        <div class="event committee-event">
+                            <span class="event-name">GCCスタッフ会議</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">5</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">タビタ</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event prayer">
+                            <span class="event-name">祈祷会</span>
+                            <span class="time">19:30</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS2</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">6</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ヨベル</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS3</span>
+                            <span class="time">14:00</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">7</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ろばの子</span>
+                            <span class="time">14:15</span>
+                        </div>
+                    </td>
+                    <td class="saturday">
+                        <div class="date"><span class="date-circle">8</span></div>
+                    </td>
+                </tr>
+                <!-- 第3週 -->
+                <tr>
+                    <td class="sunday">
+                        <div class="date"><span class="date-circle">9</span></div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">礼拝</span>
+                        </div>
+                        <div class="event camp-event">
+                            <span class="event-name">子ども祝福式</span>
+                        </div>
+                        <div class="event camp-event">
+                            <span class="event-name">クリスマスカード用写真撮影</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">小会</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">10</span></div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">11</span></div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">12</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">タビタ</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ぶどうの木</span>
+                            <span class="time">13:30</span>
+                        </div>
+                        <div class="event prayer">
+                            <span class="event-name">祈祷会</span>
+                            <span class="time">19:30</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">13</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ヨベル</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event committee-event">
+                            <span class="event-name">国内宣教委員会</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">14</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ろばの子</span>
+                            <span class="time">14:15</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS5</span>
+                            <span class="time">20:00</span>
+                        </div>
+                    </td>
+                    <td class="saturday">
+                        <div class="date"><span class="date-circle">15</span></div>
+                    </td>
+                </tr>
+                <!-- 第4週 -->
+                <tr>
+                    <td class="sunday">
+                        <div class="date"><span class="date-circle">16</span></div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">礼拝</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">執事会</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">小牧者会</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">17</span></div>
+                        <div class="event study">
+                            <span class="event-name">NLS6</span>
+                            <span class="time">14:00</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">18</span></div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">19</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">タビタ</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ぶどうの木</span>
+                            <span class="time">13:30</span>
+                        </div>
+                        <div class="event prayer">
+                            <span class="event-name">祈祷会</span>
+                            <span class="time">19:30</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">20</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ヨベル</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS7</span>
+                            <span class="time">12:00</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS3</span>
+                            <span class="time">14:00</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ひつじ</span>
+                            <span class="time">13:30</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">21</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ろばの子</span>
+                            <span class="time">14:15</span>
+                        </div>
+                    </td>
+                    <td class="saturday">
+                        <div class="date"><span class="date-circle">22</span></div>
+                    </td>
+                </tr>
+                <!-- 第5週 -->
+                <tr>
+                    <td class="sunday holiday-cell">
+                        <div class="date"><span class="date-circle">23</span></div>
+                        <div class="event holiday">
+                            <span class="event-name">勤労感謝の日（祝日）</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">礼拝</span>
+                        </div>
+                        <div class="event camp-event">
+                            <span class="event-name">大掃除</span>
+                        </div>
+                        <div class="event camp-event">
+                            <span class="event-name">クリスマス飾付</span>
+                        </div>
+                        <div class="event committee-event">
+                            <span class="event-name">佐倉王子台出張（午後）</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">24</span></div>
+                        <div class="event committee-event">
+                            <span class="event-name">大会会議</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">25</span></div>
+                        <div class="event committee-event">
+                            <span class="event-name">大会会議</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">26</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">タビタ</span>
+                            <span class="time">10:30</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ぶどうの木</span>
+                            <span class="time">13:30</span>
+                        </div>
+                        <div class="event prayer">
+                            <span class="event-name">祈祷会</span>
+                            <span class="time">19:30</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">27</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ヨベル</span>
+                            <span class="time">10:30</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date"><span class="date-circle">28</span></div>
+                        <div class="event cell-group">
+                            <span class="event-name">ナルド</span>
+                            <span class="time">13:30</span>
+                        </div>
+                        <div class="event cell-group">
+                            <span class="event-name">ろばの子</span>
+                            <span class="time">14:15</span>
+                        </div>
+                        <div class="event study">
+                            <span class="event-name">NLS5</span>
+                            <span class="time">20:00</span>
+                        </div>
+                    </td>
+                    <td class="saturday">
+                        <div class="date"><span class="date-circle">29</span></div>
+                    </td>
+                </tr>
+                <!-- 第6週 + 翌月 -->
+                <tr>
+                    <td class="sunday">
+                        <div class="date"><span class="date-circle">30</span></div>
+                        <div class="event worship">
+                            <span class="event-name">CS</span>
+                        </div>
+                        <div class="event worship">
+                            <span class="event-name">賛美礼拝</span>
+                        </div>
+                        <div class="event camp-event">
+                            <span class="event-name">中原先生就職式</span>
+                            <span class="time">15:00</span>
+                        </div>
+                        <div class="event">
+                            <span class="event-name">アドベント（待降節）開始</span>
+                        </div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">1</span></div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">2</span></div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">3</span></div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">4</span></div>
+                    </td>
+                    <td class="other-month">
+                        <div class="date"><span class="date-circle">5</span></div>
+                    </td>
+                    <td class="other-month saturday">
+                        <div class="date"><span class="date-circle">6</span></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
